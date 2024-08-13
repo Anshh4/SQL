@@ -1,0 +1,145 @@
+create database emp;
+use emp;
+CREATE TABLE emp (
+  empno decimal(4,0) NOT NULL,
+  ename varchar(10) default NULL,
+  job varchar(9) default NULL,
+  mgr decimal(4,0) default NULL,
+  hiredate date default NULL,
+  sal decimal(7,2) default NULL,
+  comm decimal(7,2) default NULL,
+  deptno decimal(2,0) default NULL
+);
+
+create database dept;
+use dept;
+CREATE TABLE dept (
+  deptno decimal(2,0) default NULL,
+  dname varchar(14) default NULL,
+  loc varchar(13) default NULL
+);
+
+INSERT INTO emp VALUES ('7369','SMITH','CLERK','7902','1980-12-17','800.00',NULL,'20');
+INSERT INTO emp VALUES ('7499','ALLEN','SALESMAN','7698','1981-02-20','1600.00','300.00','30');
+INSERT INTO emp VALUES ('7521','WARD','SALESMAN','7698','1981-02-22','1250.00','500.00','30');
+INSERT INTO emp VALUES ('7566','JONES','MANAGER','7839','1981-04-02','2975.00',NULL,'20');
+INSERT INTO emp VALUES ('7654','MARTIN','SALESMAN','7698','1981-09-28','1250.00','1400.00','30');
+INSERT INTO emp VALUES ('7698','BLAKE','MANAGER','7839','1981-05-01','2850.00',NULL,'30');
+INSERT INTO emp VALUES ('7782','CLARK','MANAGER','7839','1981-06-09','2450.00',NULL,'10');
+INSERT INTO emp VALUES ('7788','SCOTT','ANALYST','7566','1982-12-09','3000.00',NULL,'20');
+INSERT INTO emp VALUES ('7839','KING','PRESIDENT',NULL,'1981-11-17','5000.00',NULL,'10');
+INSERT INTO emp VALUES ('7844','TURNER','SALESMAN','7698','1981-09-08','1500.00','0.00','30');
+INSERT INTO emp VALUES ('7876','ADAMS','CLERK','7788','1983-01-12','1100.00',NULL,'20');
+INSERT INTO emp VALUES ('7900','JAMES','CLERK','7698','1981-12-03','950.00',NULL,'30');
+INSERT INTO emp VALUES ('7902','FORD','ANALYST','7566','1981-12-03','3000.00',NULL,'20');
+INSERT INTO emp VALUES ('7934','MILLER','CLERK','7782','1982-01-23','1300.00',NULL,'10');
+Select*from emp;
+
+INSERT INTO dept VALUES ('10','ACCOUNTING','NEW YORK');
+INSERT INTO dept VALUES ('20','RESEARCH','DALLAS');
+INSERT INTO dept VALUES ('30','SALES','CHICAGO');
+INSERT INTO dept VALUES ('40','OPERATIONS','BOSTON');
+select*from dept;
+select ename,job,hiredate from emp where deptno=10;
+select ename,sal,deptno from emp where sal>1500 AND deptno=30;
+select ename,sal,deptno from emp where sal>1500 OR deptno=30;
+select ename,mgr,deptno,sal from emp where deptno=10 AND mgr=7839;
+select ename,mgr,deptno,sal from emp where deptno=10 OR mgr=7839;
+select ename,deptno,sal from emp where sal>=2450 AND sal<=5000;
+select ename,mgr,deptno,sal from emp where sal between 2450 AND 5000;
+select ename,job from emp where job in('SALESMAN','CLERK','MANAGER');
+select ename,job from emp where job not in('SALESMAN','CLERK','MANAGER');
+select ename,sal,sal*12 as "Anuual Salary" from emp;
+select ename,sal,sal/26 as "Daily wages" from emp;
+select ename,sal/26 as "Daily wages" from emp where deptno in(20,30) and job in ("SALESMAN","CLERK");
+select ename,sal,sal/26 from emp where deptno in(20,30) AND job("SALESMAN","CLERK");
+select * from emp where sal>=2000 AND sal<=5000;
+select ename from emp where ename like "%r";
+select ename from emp where ename like "b%";
+select ename from emp where ename like "b%e";
+select ename from emp where ename like "%r%";
+select ename,hiredate from emp where hiredate like "%28";
+select ename,hiredate from emp where ename like "__r%";
+select ename,hiredate from emp where hiredate like "%1981%__";
+select ename,hiredate from emp where hiredate like "_%12%_";
+select*from emp where hiredate not like "1981%";
+select ename,sal,sal/26 as "Daily wages"from emp;
+select ename,sal,sal+comm as "Monthly Salary" from emp;
+select ename,sal from emp where sal>3000;
+select * from emp where deptno=10;
+select * from emp where deptno in (10);
+select * from emp where deptno not in (20);
+select * from emp where deptno !=20;
+select * from emp where ename in("BLAKE");
+select * from emp where job in("SALESMAN") AND sal>1000;
+select * from emp where job in ("SALESMAN") OR job in("CLERK");
+select * from emp where sal<=1000;
+select*from emp where sal between 2000 AND 5000;
+select * from emp where ename like ("s%");
+select * from emp where ename in("BLAKE","KING","CLARK","SMITH");
+select * from emp where year(hiredate)=1981;
+select * from emp where month(hiredate)=12;
+select * from emp where ename like "%a_e%";
+select empno,ename,sal,mgr from emp where mgr in (7698);
+select * from emp where ename like "___r%";
+select * from emp where job in ("CLERK") AND deptno in(20);
+select * from emp where year(hiredate)!=1981;
+select * from emp where comm is null;
+select*from emp where comm is not null;
+select*from emp where ename is null;
+select*from emp where sal=null;
+insert into emp (empno,job,mgr,hiredate,sal,deptno) Value('1001','SALESMAN','7839','1982-12-25','4000','32');
+select distinct job from emp;
+select*from emp limit 5;
+select*from emp limit 3,5;
+create table student(rollno int(3),name varchar(20),course varchar(20),fees int(11));
+
+desc student;
+insert into student values(1,"jack","BScit",22000);
+alter table student add column city varchar(20);
+select*from student;
+alter table student add column email varchar(40),add column phone int(10);
+select*from student;
+desc student;
+alter table student modify column course varchar(50);
+desc student;
+select*from student;
+alter table student change column phone phone_no int;
+desc student;
+alter table student add column age int (11);
+select*from student;
+alter table student change name student_Id varchar(20);
+select*from student;
+insert into student (rollno,student_Id,course,fees)values(2,"sanvi","BScit",29000);
+insert into student(rollno,student_Id,course,fees) values(3,"sam","BScit",25000);
+insert into student(rollno,student_Id,course,fees) values(4,"varun","BScit",20000);
+select*from student;
+update student set course="MScIt";
+select*from student;
+update student set fees=21000 where rollno=3;
+select*from student;
+update student set course="Btech" where student_Id="sanvi";
+update student set student_Id="Varun",fees=35000 where course="Btech";	
+delete from student where student_Id="sam";
+create table pet(pet_name varchar(20),pet_age int,pet_description varchar(50),pet_price int);
+insert into pet values("Tom",8,"A companion",20000),("Samyy",5,"Cute and loyal",30000),("Jack",10,"Protective and loyal",50000),("Rocky",7,"Cute",25000);
+select*from pet;
+alter table pet add column pet_food varchar(20);
+alter table pet add column pet_breed varchar(20);
+drop table pet;
+create table pet(pet_name varchar(20),pet_age int,pet_description varchar(50),pet_price int);
+alter table pet add pet_food varchar (20);
+alter table pet add pet_breed varchar(20);
+select*from pet;
+insert into pet values("Tom",8,"It is a medium-sized, muscular dog",20000,"pedigree","labrodar"),("Samyy",5,"Cute and loyal",30000,"peteat","poodle"),("Jack",10,"Protective and loyal",50000,"pedigree","germanshepherd"),("jerry",7,"protectagnist",25000,"peteat","boxer"),("champ",15,"cute",40000,"peadgree","Beagle");
+select*from pet where pet_age>5;
+select*from pet where pet_breed="labrodar";
+select*from pet where pet_price between 34000 and 56000;
+select*from pet where pet_food="pedigree";
+alter table pet change column pet_description description varchar(50);
+alter table pet modify column  description varchar(150);
+desc pet;
+select*from pet;
+update pet set pet_price=20000 where pet_age>7;
+delete from pet where pet_price<10000;
+select*from pet;
